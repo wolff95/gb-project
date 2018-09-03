@@ -1,0 +1,8 @@
+<mat-form-field>
+  <input matInput placeholder="{{param}}" type="number" (keyup)="onValChange(inputFormControl.value)" [formControl]="inputFormControl"
+    [(ngModel)]="value">
+  <span matPrefix>€&nbsp;</span>
+  <mat-error *ngIf="inputFormControl.hasError('required')">
+    Email is <strong>required</strong>
+  </mat-error>
+</mat-form-field>
