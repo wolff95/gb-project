@@ -1,9 +1,15 @@
 # GbProject
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.5.
+Step to run the project:
+`npm install`
 
-## Development server
+If an error occurs:
+`npm cache clean --force`
+and than, again, `npm install`
 
+Back end
+Run `node server` for a dev server.
+The server is listened on port 4300 (`http://localhost:4300/`)
+
+Front end
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-For mocked data run `json-server --watch mock.json`
