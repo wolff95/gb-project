@@ -1,7 +1,0 @@
-<mat-form-field>
-  <input matInput placeholder="Gross" type="number" (keyup)="onValChange(grossFormControl.value)" [formControl]="grossFormControl">
-  <span matPrefix>€&nbsp;</span>
-  <mat-error *ngIf="grossFormControl.hasError('required')">
-    Email is <strong>required</strong>
-  </mat-error>
-</mat-form-field>

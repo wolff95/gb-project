@@ -1,20 +1,10 @@
-<!--<gb-vat-buttons (recalculate)="recalculate()"></gb-vat-buttons>
-<gb-gross-input (calculateByGross)="calculateByGross($event)" [(grossValue)]="grossValue"></gb-gross-input>
-<gb-vat-input (calculateByVat)="calculateByVat($event)" [(vatValue)]="vatValue"></gb-vat-input>
-<gb-net-input (calculateByNet)="calculateByNet($event)" [(netValue)]="netValue"></gb-net-input>-->
-<!-- First part done -->
-<section>
+<gb-header></gb-header>
 
-  <div class="calculator">
-    <div class="calculator-header">
-      <gb-vat-buttons (recalculate)="recalculateBy()"></gb-vat-buttons>
+<section class="main-container" fxLayout="column" fxLayoutWrap fxLayoutAlign="center">
+    <div class="buttons-container" fxLayoutAlign="center">
+        <gb-vat-buttons></gb-vat-buttons>
     </div>
-
-    <calculator-input (event)="recalculateBy($event)" param="gross" [(value)]="grossVal"></calculator-input>
-
-    <calculator-input (event)="recalculateBy($event)" param="vat" [(value)]="vatVal"></calculator-input>
-
-    <calculator-input (event)="recalculateBy($event)" param="net" [(value)]="netVal"></calculator-input>
-
-  </div>
+    <div class="inputs-container" fxLayout="row" fxLayout.sm="column" fxLayout.xs="column" fxLayoutGap="5%" fxLayoutAlign="center">
+      <gb-input fxLayoutAlign="center" fxFlex="33" fxFlex.sm="100" *ngFor="let input of inputs" [inputObj]="input"></gb-input>
+    </div>
 </section>

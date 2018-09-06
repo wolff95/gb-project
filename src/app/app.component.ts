@@ -1,6 +1,5 @@
 import { Component } from "@angular/core";
-import { VatRateService } from "./services/vat-rate.service";
-import { CalculatorObj } from "./models/calculator-value-obj.model";
+import { VatRateService } from "./_services/vat-rate.service";
 
 @Component({
   selector: "app-root",
@@ -8,26 +7,22 @@ import { CalculatorObj } from "./models/calculator-value-obj.model";
   styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-  calculatorValueObj: CalculatorObj = new CalculatorObj();
-  grossVal: number;
-  netVal: number;
-  vatVal: number;
-  errorMessage: string;
+  inputs: Array<any>;
 
-  constructor(private vatRateService: VatRateService) {}
-
-  recalculate() {
-    //this.calculateByGross(this.calculatorValueObj.grossValue);
-  }
-
-  recalculateBy(param: string) {
-    this.calculatorValueObj = this.vatRateService.calculateBy(param);
-    if (this.calculatorValueObj) {
-      this.netVal = this.calculatorValueObj.netValue;
-      this.grossVal = this.calculatorValueObj.grossValue;
-      this.vatVal = this.calculatorValueObj.vatValue;
-    } else {
-      this.errorMessage = this.vatRateService.errorMessage;
-    }
+  constructor(private vatRateService: VatRateService) {
+    this.inputs = [
+      {
+      constName: 'grossValue',
+      label: 'Gross',
+      },
+      {
+        constName: 'vatValue',
+        label: 'VAT',
+      },
+      {
+        constName: 'netValue',
+        label: 'Net',
+      }
+    ]
   }
 }

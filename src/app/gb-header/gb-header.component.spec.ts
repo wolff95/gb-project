@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { NetInputComponent } from './net-input.component';
+import { GbHeaderComponent } from './gb-header.component';
 
-describe('NetInputComponent', () => {
-  let component: NetInputComponent;
-  let fixture: ComponentFixture<NetInputComponent>;
+describe('GbHeaderComponent', () => {
+  let component: GbHeaderComponent;
+  let fixture: ComponentFixture<GbHeaderComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NetInputComponent ]
+      declarations: [ GbHeaderComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(NetInputComponent);
+    fixture = TestBed.createComponent(GbHeaderComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

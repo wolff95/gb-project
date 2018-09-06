@@ -1,0 +1,17 @@
+
+mat-button-toggle-group {
+  width: 100%;
+  .button-toggle {
+    width: 35%;
+  }
+}
+
+mat-error {
+  margin-top: 10px;
+}
+
+.mat-button-toggle-checked {
+  background-color: #002395;
+  color: rgba(0,0,0,.54);
+  color: #ffffff;
+}

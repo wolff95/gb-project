@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from "@angular/core";
-import { VatRateService } from "../services/vat-rate.service";
+import { VatRateService } from "../_services/vat-rate.service";
 
 @Component({
   selector: "gb-vat-buttons",
@@ -7,20 +7,22 @@ import { VatRateService } from "../services/vat-rate.service";
   styleUrls: ["./vat-buttons.component.scss"]
 })
 export class VatButtonsComponent implements OnInit {
-  constructor(private vatRateService: VatRateService) {}
+  constructor(private vatRateService: VatRateService) {
+
+  }
 
   @Output() recalculate = new EventEmitter<number>();
 
-  vatRates: number[];
+  vatRates: Number[];
+  isVatRateSelected: boolean = false;
 
-  ngOnInit() {
-    this.vatRateService.getVatRates().subscribe(vatRates => {
-      this.vatRates = vatRates;
-    });
+  ngOnInit(){
+    this.vatRateService.getVatRates()
+    .subscribe(data => this.vatRates = data.values);
   }
 
   onValChange(val: number) {
-    this.vatRateService.selectedVatRate = val;
-    this.recalculate.emit();
+    this.isVatRateSelected = true;
+    this.vatRateService.changeValue(val, 'vatRate');
   }
 }

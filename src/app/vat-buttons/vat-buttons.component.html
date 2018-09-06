@@ -1,3 +1,6 @@
 <mat-button-toggle-group #group="matButtonToggleGroup">
-  <mat-button-toggle *ngFor="let vatRate of vatRates" (change)="onValChange(group.value)" [value]="vatRate">{{vatRate}}%</mat-button-toggle>
+  <mat-button-toggle class="button-toggle" *ngFor="let vatRate of vatRates" (change)="onValChange(group.value)" [value]="vatRate">{{vatRate}}%</mat-button-toggle>
 </mat-button-toggle-group>
+<mat-error *ngIf="!isVatRateSelected">
+    You must select a <strong>VAT rate</strong>
+</mat-error>

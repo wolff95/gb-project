@@ -1,19 +1,16 @@
-input {
-  width: 180px;
+
+.main-container {
+  height: 100%;
+  padding: 10% 15% 0;
 }
 
-section {
+.inputs-container {
+  margin-top: 5%;
+}
+
+gb-vat-buttons {
   width: 100%;
-  height: 100vh;
-  .calculator {
-    margin: auto;
-    width: 60%;
-    border: 3px solid #73ad21;
-    padding: 10px;
-    .calculator-header {
-      width: auto;
-      height: auto;
-      margin: 0 auto;
-    }
-  }
+  max-width: 400px;
+  text-align: center;
+  min-height: 64px;
 }
