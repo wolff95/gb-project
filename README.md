@@ -6,6 +6,9 @@ Step to run the project:
 If an error occurs:
 `npm cache clean --force`
 and than, again, `npm install`
+OR
+delete the `package-lock.json`
+and than, again, `npm install`
 
 Back end
 Run `node server` for a dev server.
