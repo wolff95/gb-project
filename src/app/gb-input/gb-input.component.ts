@@ -21,9 +21,7 @@ export class GbInputComponent{
   @Input() inputObj: any;
   
   //const: formatting rules;
-  minValue:number = 0.001;
-  maxDecimalsTransform = '1.0-' + this.minValue.toString().split('.')[1].length.toString();
-
+  minValue:number = 0.009;
   formControl = new FormControl('', [Validators.required, Validators.min(this.minValue)]);
 
   constructor(private vatRateService: VatRateService) {
