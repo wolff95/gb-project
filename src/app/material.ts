@@ -2,7 +2,8 @@ import {
   MatButtonToggleModule,
   MatInputModule,
   MatFormFieldModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatCheckboxModule
 } from "@angular/material";
 import { ReactiveFormsModule } from "@angular/forms";
 import { NgModule } from "@angular/core";
@@ -13,14 +14,16 @@ import { NgModule } from "@angular/core";
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule
   ],
   exports: [
     MatButtonToggleModule,
     MatInputModule,
     MatFormFieldModule,
     ReactiveFormsModule,
-    MatToolbarModule
+    MatToolbarModule,
+    MatCheckboxModule
   ]
 })
 export class MaterialModule {}

@@ -16,6 +16,8 @@ export class VatRateService {
   vatValue: number;
   netValue: number;
 
+  round: boolean = true;
+
   lastChangedValue: string;
 
   constructor(private http: HttpClient ){
@@ -35,7 +37,12 @@ export class VatRateService {
       this.recalculate(constName);
     }
   }
-  
+
+  roundChangeValue(roundVal: boolean){
+    this.round = roundVal;
+    this.recalculate(this.lastChangedValue);
+  }
+
   recalculate(constName) {
     switch (constName) {
       case 'grossValue':

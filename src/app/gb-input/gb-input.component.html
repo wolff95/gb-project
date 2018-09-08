@@ -1,9 +1,9 @@
 <mat-form-field fxFlex="100">
-  <input matInput 
+  <input matInput
   [placeholder]="inputObj.label"
   type="number"
-  (keyup)="onValChange(formControl.value)"
-  [value]="formControl.value | customNumber:2"
+  (input)="onValChange(formControl.value)"
+  [value]="formControl.value"
   [formControl]="formControl">
   <span matPrefix>€&nbsp;</span>
   <mat-error *ngIf="formControl.hasError('required')">
@@ -13,3 +13,4 @@
       <strong>{{inputObj.label}}</strong> must be greater than 0
   </mat-error>
 </mat-form-field>
+{{formControl.value | number:'1.2-2'}}

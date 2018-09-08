@@ -12,8 +12,8 @@ export class AppComponent {
   constructor(private vatRateService: VatRateService) {
     this.inputs = [
       {
-      constName: 'grossValue',
-      label: 'Gross',
+        constName: 'grossValue',
+        label: 'Gross',
       },
       {
         constName: 'vatValue',
