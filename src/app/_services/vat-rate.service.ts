@@ -16,7 +16,7 @@ export class VatRateService {
   vatValue: number;
   netValue: number;
 
-  round: boolean = true;
+  round: boolean = false;
 
   lastChangedValue: string;
 
@@ -28,22 +28,19 @@ export class VatRateService {
     return this.http.get<IVatRates>(this.ENDPOINT + '/getVatRates');
   }
 
+  //gb-input and vat-buttons change trigger
   changeValue(dataVal: number, constName: string) {
     if (constName) {
       this[constName] = dataVal;
       if(constName !== 'vatRate') {
         this.lastChangedValue = constName;
       }
-      this.recalculate(constName);
+      this.calculate(constName);
     }
   }
 
-  roundChangeValue(roundVal: boolean){
-    this.round = roundVal;
-    this.recalculate(this.lastChangedValue);
-  }
-
-  recalculate(constName) {
+  //calculate by where user types
+  calculate(constName) {
     switch (constName) {
       case 'grossValue':
         this.isGrossValueDefined()
@@ -78,7 +75,14 @@ export class VatRateService {
 
   vatRateChanged() {
     if(this.lastChangedValue) {
-      this.recalculate(this.lastChangedValue)
+      this.calculate(this.lastChangedValue)
     }
+  }
+
+  //gb-round-checkbox change trigger
+  roundChangeValue(roundVal: boolean){
+    this.round = roundVal;
+    this.lastChangedValue = '';
+    this.calculate(this.lastChangedValue);
   }
 }

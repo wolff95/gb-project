@@ -9,12 +9,9 @@ import { AppComponent } from "./app.component";
 import { VatButtonsComponent } from "./vat-buttons/vat-buttons.component";
 import { GbInputComponent } from "./gb-input/gb-input.component";
 import { VatRateService } from "./_services/vat-rate.service";
-import { RoundNumberPipe } from "./_pipes/customNumber.pipe";
+import { RoundNumberPipe } from "./_pipes/round-number.pipe";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { GbHeaderComponent } from './gb-header/gb-header.component';
-import { DecimalPipe } from "@angular/common";
-
-import { registerLocaleData } from '@angular/common';
 import { GbRoundCheckboxComponent } from './gb-round-checkbox/gb-round-checkbox.component';
 
 @NgModule({
@@ -23,7 +20,7 @@ import { GbRoundCheckboxComponent } from './gb-round-checkbox/gb-round-checkbox.
     VatButtonsComponent,
     GbInputComponent,
     GbHeaderComponent,
-    GbRoundCheckboxComponent
+    GbRoundCheckboxComponent,
   ],
   imports: [
     BrowserModule,
@@ -33,7 +30,7 @@ import { GbRoundCheckboxComponent } from './gb-round-checkbox/gb-round-checkbox.
     HttpClientModule,
     FlexLayoutModule
   ],
-  providers: [VatRateService, DecimalPipe, RoundNumberPipe],
+  providers: [VatRateService, RoundNumberPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule {}

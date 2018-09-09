@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GrossInputComponent } from './gross-input.component';
+import { GbInputComponent } from './gb-input.component';
 
 describe('GrossInputComponent', () => {
-  let component: GrossInputComponent;
-  let fixture: ComponentFixture<GrossInputComponent>;
+  let component: GbInputComponent;
+  let fixture: ComponentFixture<GbInputComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ GrossInputComponent ]
+      declarations: [ GbInputComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(GrossInputComponent);
+    fixture = TestBed.createComponent(GbInputComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
