@@ -4,7 +4,11 @@
 
 export const environment = {
   production: false,
-  end_point: "http://localhost:4300"
+  end_point: "http://localhost:4300",
+  constants: {
+    minValueValidator: 0.000000000001,
+    minDecimalLength: 2
+  }
 };
 
 /*

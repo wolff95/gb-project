@@ -8,11 +8,18 @@ import { VatRateService } from "../_services/vat-rate.service";
 })
 export class GbRoundCheckboxComponent{
   round:boolean;
-
+  
+  /**
+   * set the value default from the service
+   */
   constructor(private vatRateService: VatRateService) { 
     this.round = vatRateService.round;
   }
 
+/**
+ * clicking the round checkbox comunicate the change
+ * @param  {boolean} val
+ */
   onToggle(val: boolean){
     this.vatRateService.roundChangeValue(val);
   }

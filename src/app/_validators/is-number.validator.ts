@@ -1,21 +1,12 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-/*export function ValidateUrl(control: AbstractControl) {
-  var pattern = '^[0-9]+[.]{0,1}[0-9]+$'; //Quella giusta
-  var pattern1 = '[0-9]+([\.][0-9]{1,2})?';
-  var pattern2 = '^[\-]{0,1}[0-9]+[\.]+|[\-]{0,1}[0-9]+$'; //Puoi scrivere tante volte sia ,.,.;
-  var regex = RegExp(pattern);
-  
-  if (regex.test(control.value)) {
-    console.log("is a valid number: " + control.value)
-    return null;
-  }
-  return { validUrl: false };
-}*/
-
+/**
+ * custom validator with Regex for valid numbers eg. 10000.00 | 10000,00
+ * @returns {[key: string]: any} trigger error validation on component 
+ */
 export function isValidNumber(): ValidatorFn {
   return (control: AbstractControl): {[key: string]: any} | null => {
-    var pattern = '^[0-9]+[.]{0,1}[0-9]+$';
+    var pattern = '^[0-9]+([,.][0-9]+)?$';
     var regex = RegExp(pattern);
 
     const match = regex.test(control.value);

@@ -3,6 +3,7 @@ import {FormControl, FormGroupDirective, NgForm, Validators, ValidatorFn, Abstra
 import { VatRateService } from "../_services/vat-rate.service";
 import { RoundNumberPipe } from '../_pipes/round-number.pipe';
 import { isValidNumber } from "../_validators/is-number.validator"
+import { environment } from "../../environments/environment";
 
 @Component({
   selector: "gb-input",
@@ -12,59 +13,47 @@ import { isValidNumber } from "../_validators/is-number.validator"
 export class GbInputComponent{
   @Input() inputObj: any;
 
-  minValue:number = 0.000000000001;
-  formControl = new FormControl('', [Validators.required, Validators.min(this.minValue), isValidNumber()]);
-
+  formControl = new FormControl('', [Validators.required, Validators.min(environment.constants.minValueValidator), isValidNumber()]);
+  
+  /**
+   * @description retrieve the value from the service on every change.
+   * enable formControl if vatRate evaluated. Manipulate to display the data correctly or formatted if round true
+   */
   constructor(private vatRateService: VatRateService, private roundNumberPipe: RoundNumberPipe) {
     vatRateService.isChangedStream.subscribe(() => {
-      //If vatRate is selected enable the input
       vatRateService.vatRate ? this.formControl.enable() : this.formControl.disable()
-
-      if(this.inputObj && this.vatRateService[this.inputObj.constName]) {
-        //Set the value, rounded if the round is checked and if the user isn't typing anymore
-        let value = vatRateService.round && vatRateService.lastChangedValue != this.inputObj.constName ? 
-        roundNumberPipe.transform(this.vatRateService[this.inputObj.constName], 2) : 
+      
+      if(this.inputObj && typeof this.vatRateService[this.inputObj.constName] !== undefined && this.inputObj.constName !== this.vatRateService.lastChangedValue) {
+        let value = vatRateService.round ? 
+        roundNumberPipe.transform(this.vatRateService[this.inputObj.constName], environment.constants.minDecimalLength) : 
         this.vatRateService[this.inputObj.constName];
-
+        
+        if(isNaN(value)){
+          value = '';
+        }
         this.formControl.patchValue(value);
       }
     })
   }
-
-  onValChange(val: string, event) {
-    let handlingZero = this.handleDecimalZeros(val, event);
-
+  
+  /**
+   * on change on input, parse it and comunicate the change
+   * @param  {string} val
+   */
+  onValChange(val: string) {
     let value = parseFloat(val.replace(',', '.'));
-    if(value && value !== 0 && !handlingZero){
-      this.vatRateService.changeValue(value, this.inputObj.constName);
-    }
-  }
 
-  //Round the input where the user was typing
-  onBlurChange(val: string){
+    this.vatRateService.changeValue(value, this.inputObj.constName);
+  }
+  
+  /**
+   * on blur round the value just inserted by the user
+   * @param  {string} val
+   */
+  roundValue(val: string){
     if(this.vatRateService.round){
-    let value = this.roundNumberPipe.transform(val, 2)
-    this.formControl.patchValue(value);
+      this.formControl.patchValue(this.roundNumberPipe.transform(val, environment.constants.minDecimalLength));
     }
   }
-
-  //If the user type ',' '.' we have to not recalculate.
-  //If the user is typing 0 after ',' '.' we have to not recalculate.
-  handleZeros:boolean;
-  oldValue:string;
-  handleDecimalZeros(val: string, event){
-    this.handleZeros = true;
-
-    //if the user change the number with significative numbers
-    if(this.oldValue){
-    let valuableOldValue = parseFloat(this.oldValue.replace(',', '.'))
-    let valuableNewValue = parseFloat(val.replace(',', '.'))
-    if(valuableOldValue != valuableNewValue)
-      this.handleZeros = false;
-    }
-
-    this.oldValue = val;
-
-    return this.handleZeros;
-  }
+  
 }

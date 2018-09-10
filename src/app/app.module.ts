@@ -20,7 +20,7 @@ import { GbRoundCheckboxComponent } from './gb-round-checkbox/gb-round-checkbox.
     VatButtonsComponent,
     GbInputComponent,
     GbHeaderComponent,
-    GbRoundCheckboxComponent,
+    GbRoundCheckboxComponent
   ],
   imports: [
     BrowserModule,

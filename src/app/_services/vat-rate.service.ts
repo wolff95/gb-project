@@ -23,15 +23,22 @@ export class VatRateService {
   constructor(private http: HttpClient ){
 
   }
-
+  
+  /**
+   * @returns Observable<IVatRates> -> vat-buttons
+   */
   getVatRates(): Observable<IVatRates> {
     return this.http.get<IVatRates>(this.ENDPOINT + '/getVatRates');
   }
 
-  //gb-input and vat-buttons change trigger
-  changeValue(dataVal: number, constName: string) {
+  /**
+   * gb-input and vat-buttons change trigger
+   * @param  {number} val
+   * @param  {string} constName
+   */
+  changeValue(val: number, constName: string) {
     if (constName) {
-      this[constName] = dataVal;
+      this[constName] = val;
       if(constName !== 'vatRate') {
         this.lastChangedValue = constName;
       }
@@ -39,7 +46,10 @@ export class VatRateService {
     }
   }
 
-  //calculate by where user types
+  /**
+   * Depends on the constName we use different cases
+   * @param  {} constName name of the data modified
+   */
   calculate(constName) {
     switch (constName) {
       case 'grossValue':
@@ -58,31 +68,50 @@ export class VatRateService {
     this.isChanged.next(!this.isChanged.getValue());
   }
 
-  isGrossValueDefined() { 
+  /**
+   * calculate @param vatValue and @param netValue
+   * with @param grossValue and @param vatRate
+   */
+  isGrossValueDefined() {
     this.vatValue = this.grossValue / 100 * this.vatRate;
     this.netValue = this.grossValue - this.vatValue;
   }
 
+  /**
+   * calculate @param grossValue and @param netValue
+   * with @param vatValue and @param vatRate
+   */
   isVatValueDefined() {
     this.grossValue = this.vatValue / this.vatRate * 100;
     this.netValue = this.grossValue - this.vatValue;
   }
 
+  /**
+   * calculate @param vatValue and @param grossValue
+   * with @param netValue and @param vatRate
+   */
   isNetValueDefined() {
     this.vatValue = this.netValue / (100 - this.vatRate) * this.vatRate;
     this.grossValue = this.netValue + this.vatValue;
   }
 
+  /**
+   * vat-buttons change trigger, calculate by @param lastChangeValue if evaluated
+   * calculate@param netvalue and @param vatValue
+   */
   vatRateChanged() {
     if(this.lastChangedValue) {
       this.calculate(this.lastChangedValue)
     }
   }
-
-  //gb-round-checkbox change trigger
+  
+  /**
+   * toggle round mode and calculate by the @param lastChangedValue
+   * @param  {boolean} roundVal
+   */
   roundChangeValue(roundVal: boolean){
     this.round = roundVal;
-    this.lastChangedValue = '';
     this.calculate(this.lastChangedValue);
   }
+  
 }

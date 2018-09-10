@@ -2,8 +2,8 @@
   <input matInput
   [placeholder]="inputObj.label"
   type="text"
-  (input)="onValChange(formControl.value, $event)"
-  (blur)="onBlurChange(formControl.value, $event)"
+  (input)="onValChange(formControl.value)"
+  (blur)="roundValue(formControl.value)"
   [value]="formControl.value"
   [formControl]="formControl">
   <span matPrefix>€&nbsp;</span>
