@@ -1,8 +1,8 @@
 # GbProject
 
 Must to have dependencies:
-Node
-AngularCli (npm install @angular/cli -g)
+- Node
+- AngularCli (npm install @angular/cli -g)
 
 Step to run the project:
 `npm install`
