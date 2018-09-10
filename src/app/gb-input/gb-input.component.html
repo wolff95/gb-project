@@ -1,22 +1,18 @@
 <mat-form-field fxFlex="100">
-  <input matInput
-  [placeholder]="inputObj.label"
-  type="text"
-  (input)="onValChange(formControl.value)"
-  (blur)="roundValue(formControl.value)"
-  [value]="formControl.value"
-  [formControl]="formControl">
-  <span matPrefix>€&nbsp;</span>
-  <mat-error *ngIf="formControl.hasError('required')">
-      You must enter a <strong>{{inputObj.label}}</strong>
-  </mat-error>
-  <mat-error *ngIf="formControl.hasError('min')">
-      <strong>{{inputObj.label}}</strong> must be greater than 0
-  </mat-error>
-  <mat-error 
-    *ngIf="!formControl.hasError('required') && 
+    <input matInput [placeholder]="inputObj.label" type="text" (input)="onValChange(formControl.value)" (blur)="roundValue(formControl.value)"
+        [value]="formControl.value" [formControl]="formControl">
+    <span matSuffix class="input-suffix">€&nbsp;</span>
+    <mat-error *ngIf="formControl.hasError('required')">
+        You must enter a
+        <strong>{{inputObj.label}}</strong>
+    </mat-error>
+    <mat-error *ngIf="formControl.hasError('min')">
+        <strong>{{inputObj.label}}</strong> must be greater than 0
+    </mat-error>
+    <mat-error *ngIf="!formControl.hasError('required') && 
     !formControl.hasError('min') && 
     formControl.hasError('isValidNumber')">
-    You must enter a valid number &#40;eg. <strong>1000.00</strong>&#41;
-</mat-error>
+        You must enter a valid number &#40;eg.
+        <strong>1000.00</strong>&#41;
+    </mat-error>
 </mat-form-field>

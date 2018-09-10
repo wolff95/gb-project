@@ -16,7 +16,7 @@ export class VatRateService {
   vatValue: number;
   netValue: number;
 
-  round: boolean = false;
+  round: boolean = true;
 
   lastChangedValue: string;
 
